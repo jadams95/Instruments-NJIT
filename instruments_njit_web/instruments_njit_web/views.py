@@ -8,3 +8,6 @@ def detail(request, question_id):
 
 def homepage(request):
     return render(request, "Index.html")
+
+def productpage(request):
+    return render(request, "Product.html")
