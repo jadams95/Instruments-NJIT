@@ -19,6 +19,7 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
+    path('', views.homepage),
     path('admin/', admin.site.urls),
     path("<int:question_id>/", views.detail, name="detail")
 ]
