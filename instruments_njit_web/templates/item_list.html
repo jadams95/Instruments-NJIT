@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<body>
+{% block content %}
+<h2>a List of items</h2>
+
+{% for item in items %}
+{{ item }}
+{% endfor %}
+{% endblock content %}
+</body>
+</html>
