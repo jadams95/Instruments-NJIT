@@ -1,0 +1,51 @@
+body{
+    background-color: #e3f2fd;
+    margin: 2.5cm;
+    margin-top: 5%;
+    margin-bottom: 0%;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 22px;
+    color:#2e4374;
+}
+
+h2{
+    text-align: left;
+    font-family: Brush Script MT, cursive;
+    color: steelblue;
+    font-size: 66px;
+    border-style: none;
+    border-bottom-style: dotted;
+    border-color: mediumvioletred;
+}
+
+p{
+    color:	black;
+}
+
+.navbar{
+    color: navy;
+}
+.card-title{
+    color: rebeccapurple;
+}
+
+.card-text{
+    color: midnightblue;
+}
+
+.card-body{
+    color: black;
+    font-size: medium;
+    padding-left: 3%;
+}
+
+img{
+    padding-left: 10%;
+    margin-top: 20%;
+    width: 22rem;
+    height: 18rem;
+}
+
+h6{
+    color: navy;
+}
