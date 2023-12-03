@@ -4,6 +4,7 @@ from django.db import models
 class Item(models.Model):
     title = models.CharField(max_length=100)
     price = models.FloatField()
+    item_main_img = models.ImageField(default=False, upload_to=settings.STATIC_ROOT + "/imgs")
 
     def __str__(self):
         return self.title
