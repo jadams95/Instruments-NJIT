@@ -12,13 +12,20 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
-
+import mimetypes
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Templates Directory
 
 TEMPLATE_DIR = os.path.join(BASE_DIR,"templates")
+
+mimetypes.add_type("text/javascript", ".js", True)
+mimetypes.add_type("text/css", ".css", True)
+mimetypes.add_type("image/jpg", ".jpg", True)
+mimetypes.add_type("image/jpeg", ".jpeg", True)
+
+
 
 
 # Quick-start development settings - unsuitable for production

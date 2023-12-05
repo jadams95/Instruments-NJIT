@@ -20,8 +20,6 @@ from . import views
 
 urlpatterns = [
     path('', include('core.urls', namespace="core")),
-    path('index.html', views.homepage),
-    path('Product.html', views.productpage),
+    path('Index.html', include('core.urls', namespace="core")),
     path('admin/', admin.site.urls),
-    path("<int:question_id>/", views.detail, name="detail")
 ]
