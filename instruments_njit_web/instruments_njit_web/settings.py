@@ -12,13 +12,20 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
-
+import mimetypes
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Templates Directory
 
 TEMPLATE_DIR = os.path.join(BASE_DIR,"templates")
+
+mimetypes.add_type("text/javascript", ".js", True)
+mimetypes.add_type("text/css", ".css", True)
+mimetypes.add_type("image/jpg", ".jpg", True)
+mimetypes.add_type("image/jpeg", ".jpeg", True)
+
+
 
 
 # Quick-start development settings - unsuitable for production
@@ -125,10 +132,9 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
+STATIC_URL = 'default/'
+STATIC_ROOT = os.path.join(BASE_DIR,'default')
 
-STATIC_URL = 'static/'
-# STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

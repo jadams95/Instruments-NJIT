@@ -1,9 +1,17 @@
 {% extends "base.html" %}
+{% load static %}
 {% block content %}
-<h2>a List of items</h2>
+<br>
+<h2>The Best Jigsaw Puzzles Store</h2>
+<p>With the largest selection of jigsaw puzzles, games, brainteasers, and accessories, you'll find the perfect puzzle or game for your family!</p>
+<p>We have thousands of unique puzzles and other products in stock year-round, and there's always something new to find, no matter your interest or skill level from beginner to large piece count puzzles.</p> 
+<p>When you buy puzzles from Magic Jigsaw Puzzles, you know that you're getting great products from your favorite brands.</p>
+<br>
+<h2>A list of puzzles you can purchase!</h2>
 
 {% for item in items %}
 {{ item }}
+<img src="{{ item.item_main_img }}" class="card-img-top" style="width: 25rem; height: 18rem;"> 
 {% endfor %}
 {% endblock content %}
 

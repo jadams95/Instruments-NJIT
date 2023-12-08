@@ -1,4 +1,3 @@
-
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
@@ -15,52 +14,18 @@
 <br>
 <h3>Best Deals 2023</h3>
 <div class="card-group" >
+  {% for item in object_list %}
+  <!-- {{ item }} -->
   <div class="card border-success mb-3" style="background-color: mintcream;">
-    <img src="NYC Street.jpg" class="card-img-top" alt="NYC Street"  style="width: 25rem; height: 18rem;">
-    <div class="card-body">
-      <h5 class="card-title"><strong>New York City<br>United States</strong></h5>
+    <img src="{{ item.item_main_img }}" class="card-img-top" style="width: 25rem; height: 18rem;"> 
+      <h5 class="card-title"><strong>{{ item.title }}</strong></h5>
       <br>
-      <p class="card-text">New York City Street - 1000pc</p>
+      <p class="card-text">{{ item.title }} - ${{ item.price }}</p>
           <br>
-          <p><em><strong>$39.99</strong></em></p>
-          <a href="NYC-street.html" class="btn btn-primary btn-lg d-grid gap-2 d-md-flex justify-content-md-end">Shop Now</a>
-    </div>
-  </div>
-
-  <div class="card border-success mb-3" style="background-color: mintcream;">
-    <img src="static/imgs/manhattan-by-night-pawelgaul.jpg" class="card-img-top" alt="Manhattan by Night" style="width: 25rem;height: 18rem;">
-    <div class="card-body">
-      <h5 class="card-title"><strong>New York City<br>United States</strong></h5>
-      <br>
-      <p class="card-text">Manhattan by Night - 1000pc</p>
-          <br>
-          <p><em><strong>$39.99</strong></em></p>
-          <a href="Manhattan-by-night.html" class="btn btn-primary btn-lg d-grid gap-2 d-md-flex justify-content-md-end">Shop Now</a>
-    </div>
-    
-  </div>
-  <div class="card border-success mb-3" style="background-color: mintcream;">
-    <img src="static/imgs/paris-eiffel-tower-hiroshi-higuchi.jpg" class="card-img-top" alt="Paris Eiffel Tower" style="width: 25rem;height: 18rem;">
-    <div class="card-body">
-      <h5 class="card-title"><strong>Paris<br>France</strong></h5>
-      <br>
-      <p class="card-text">Paris Eiffel Tower - 700pc</p>
-          <br>
-          <p><em><strong>$29.99</strong></em></p>
-          <a href="Paris-eiffel-tower.html" class="btn btn-primary btn-lg d-grid gap-2 d-md-flex justify-content-md-end">Shop Now</a>
-    </div>
-  </div>
-
-  <div class="card border-success mb-3" style="background-color: mintcream;">
-      <img src="static/imgs/place-de-la-republique-paris-eugene-galien-laloue.jpg" class="card-img-top" alt="Place de la Republique Paris" style="width: 25 rem;height: 18rem;">
-      <div class="card-body">
-        <h5 class="card-title"><strong>Paris<br>France</strong></h5>
-        <br>
-        <p class="card-text">Place de la Republique - 1500pc</p>
-          <br>
-          <p><em><strong>$49.99</strong></em></p>
-          <a href="Place-de-la-Republique-Paris.html" class="btn btn-primary btn-lg d-grid gap-2 d-md-flex justify-content-md-end">Shop Now</a>
-      </div>
+          <p><em><strong>${{ item.price }}</strong></em></p>
+          <a href="{{ item.get_absolute_url }}" class="btn btn-primary btn-lg d-grid gap-2 d-md-flex justify-content-md-end">Shop Now</a>
+          <p>{{item.get_img_file_name}}</p>
   </div>
 </div>
+{% endfor %}
 {% endblock content %}
