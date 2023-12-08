@@ -12,7 +12,7 @@
   {% for item in object_list %}
   <!-- {{ item }} -->
   <div class="card border-success mb-3" style="background-color: mintcream;">
-    <img src="{{ item.item_main_img }}" class="card-img-top" style="width: 25rem; height: 18rem;"> 
+    <img src="{{ item.item_main_img.url }}" class="card-img-top" style="width: 25rem; height: 18rem;"> 
       <h5 class="card-title"><strong>{{ item.title }}</strong></h5>
       <br>
       <p class="card-text">{{ item.title }} - ${{ item.price }}</p>
