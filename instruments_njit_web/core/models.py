@@ -36,6 +36,7 @@ class Item(models.Model):
             'slug': self.slug
         })
 
+
     
 
     # Need to add a method that calls 
@@ -58,7 +59,24 @@ class Order(models.Model):
     ordered_date = models.DateTimeField()
     ordered = models.BooleanField(default=False)
     
+    
     def __str__(self):
         # print(self)
         print(self.items)
-        return f"order-id {self.user.id} of {self.items}"
+        return f"order-id {self.user.username} of {self.items}"
+
+
+class Payment(models.Model):
+    email = models.EmailField(default=False)
+    address = models.TextField(default=False)
+    shipped = models.BooleanField(default=False)
+
+    # Basic example for credit card (not recommended for production use)
+    # In production, you should use a more secure method like using Stripe or similar payment gateways
+    credit_card_number = models.CharField(default=False, max_length=16)
+    expiration_date = models.DateField(default=False)
+    cvv = models.CharField(default=False, max_length=4)
+    
+    
+    def __str__(self):
+        return f"User's email address for the order {self.email}"

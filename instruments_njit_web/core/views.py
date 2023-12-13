@@ -1,13 +1,14 @@
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView
-from .models import Item, OrderItem, Order
+from .models import Item, OrderItem, Order, Payment
 from django.conf import settings
 from django.contrib import messages
 from django.utils import timezone
 from django.shortcuts import redirect
 import random
 import string
+from .forms import CheckoutForm
 
 
 
@@ -81,3 +82,39 @@ def remove_from_cart(request, slug):
         else:
             return redirect("core:product", slug=slug)
         return redirect("core:product", slug=slug)
+
+
+
+def checkout(request):
+    if request.method == 'POST':
+        form = CheckoutForm(request.POST)
+        if form.is_valid():
+            # Process the form data
+            email = form.cleaned_data.get('email')
+            address = form.cleaned_data.get('address')
+            shipped = form.cleaned_data.get('shipped')
+            credit_card_number = form.cleaned_data.get('credit_card_number')
+            expiration_date = form.cleaned_data.get('expiration_date')
+            cvv = form.cleaned_data.get('cvv')
+
+            # Save the order details to the database
+            # (Assuming order and associated items already exist)
+            payment = Payment.objects.create(
+                email=email,
+                address=address,
+                shipped=shipped,
+                credit_card_number=credit_card_number,
+                expiration_date=expiration_date,
+                cvv=cvv
+            )
+
+            # Perform any other necessary actions (e.g., payment processing)
+            print(payment)
+            return redirect('thank-you.html')  # Redirect to a success page after checkout
+    else:
+        form = CheckoutForm()
+
+    return render(request, 'checkout.html', {'form': form})
+
+def thankyou(request):
+    return render(request, 'thank-you.html')

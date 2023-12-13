@@ -3,7 +3,7 @@
 {% block content %}
     <br>
     <br>
-    <h2>Product</h2>
+    <h2>Puzzles</h2>
     <br>
     <br>
     <div class="card border-danger mb-3" style="max-width: 1300px; background-color: #e3f2fd;">
@@ -28,6 +28,12 @@
         </a>
         <a href="{{ object.get_remove_from_cart }}" class="btn btn-primary btn-md my-0 p">
           Remove from cart
+          <i class="fas fa-shopping-cart ml-1"></i>
+        </a>
+
+
+        <a href="/checkout.html" class="btn btn-primary btn-md my-0 p">
+          Proceed to Checkout for item
           <i class="fas fa-shopping-cart ml-1"></i>
         </a>
             </div>
