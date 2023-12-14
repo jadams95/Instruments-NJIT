@@ -1,13 +1,14 @@
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView
-from .models import Item, OrderItem, Order
+from .models import Item, OrderItem, Order, Payment
 from django.conf import settings
 from django.contrib import messages
 from django.utils import timezone
 from django.shortcuts import redirect
 import random
 import string
+from .forms import CheckoutForm
 
 
 
@@ -44,12 +45,10 @@ class ItemDetailView(DetailView):
 
 def add_to_cart(request, slug):
     item = get_object_or_404(Item, slug=slug)
-    order_item = OrderItem.objects.create(item=item)
-    order_qs = Order.objects.filter(user=request.user)
+    order_item, created = OrderItem.objects.get_or_create(item=item)
+    order_qs = Order.objects.filter(user=request.user, ordered=False)
     if order_qs.exists():
         order = order_qs[0]
-        print(order)
-        # check if the order item is in the order
         if order.items.filter(item__slug=item.slug).exists():
             order_item.quantity += 1
             order_item.save()
@@ -65,3 +64,57 @@ def add_to_cart(request, slug):
         order.items.add(order_item)
         messages.info(request, "This item was added to your cart.")
         return redirect("core:product", slug=slug)
+
+def remove_from_cart(request, slug):
+        item = get_object_or_404(Item, slug=slug)
+        order_qs = Order.objects.filter(user=request.user, ordered=False)
+        if order_qs.exists():
+            order = order_qs[0]
+            if order.items.filter(item__slug=item.slug).exists():
+                order_item = OrderItem.objects.filter(item=item)[0]
+                order.items.remove(order_item)
+                order_item.delete()
+                messages.info(request, "This item was removed from your cart.")
+                
+            else:
+                messages.info(request, "This item was not in your cart.")
+                return redirect("core:product", slug=slug)
+        else:
+            return redirect("core:product", slug=slug)
+        return redirect("core:product", slug=slug)
+
+
+
+def checkout(request):
+    if request.method == 'POST':
+        form = CheckoutForm(request.POST)
+        if form.is_valid():
+            # Process the form data
+            email = form.cleaned_data.get('email')
+            address = form.cleaned_data.get('address')
+            shipped = form.cleaned_data.get('shipped')
+            credit_card_number = form.cleaned_data.get('credit_card_number')
+            expiration_date = form.cleaned_data.get('expiration_date')
+            cvv = form.cleaned_data.get('cvv')
+
+            # Save the order details to the database
+            # (Assuming order and associated items already exist)
+            payment = Payment.objects.create(
+                email=email,
+                address=address,
+                shipped=shipped,
+                credit_card_number=credit_card_number,
+                expiration_date=expiration_date,
+                cvv=cvv
+            )
+
+            # Perform any other necessary actions (e.g., payment processing)
+            print(payment)
+            return redirect('thank-you.html')  # Redirect to a success page after checkout
+    else:
+        form = CheckoutForm()
+
+    return render(request, 'checkout.html', {'form': form})
+
+def thankyou(request):
+    return render(request, 'thank-you.html')
