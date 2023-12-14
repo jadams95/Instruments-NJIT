@@ -16,6 +16,12 @@ import mimetypes
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+
+# Team Puzzles
+# John Tyler Adams
+# Ki Wai Kwan
+
+
 # Templates Directory
 
 TEMPLATE_DIR = os.path.join(BASE_DIR,"templates")
@@ -24,6 +30,7 @@ mimetypes.add_type("text/javascript", ".js", True)
 mimetypes.add_type("text/css", ".css", True)
 mimetypes.add_type("image/jpg", ".jpg", True)
 mimetypes.add_type("image/jpeg", ".jpeg", True)
+
 
 
 
@@ -92,7 +99,11 @@ DATABASES = {
     'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'postgres',
         'USER': 'postgres',
+<<<<<<< HEAD
         'PASSWORD': 'vk1234',
+=======
+        'PASSWORD': 'Adam1212DB',
+>>>>>>> 6e348ab92749a712a90bd2c5c60a8991d38ccb15
         'HOST': 'localhost',
         'PORT': '5432',
     }
