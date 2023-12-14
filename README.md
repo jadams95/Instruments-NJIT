@@ -8,13 +8,14 @@
  ##### Local Setup
  - pip wrappper needs to install the following packages
  - pip install pyscopg2
- - pip install Pillow
- 
+ - pip install Pillow 
+ - When installing the Postgres DB create a user to store the DB info in the settings.py
+
  - python manage.py runmigrations
  - python manage.py runmigrations core
  - python manage.py migrate
 
-
+ 
 
 
 ### 
